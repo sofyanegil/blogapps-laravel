@@ -18,6 +18,9 @@ class Post extends Model
         'category_id',
     ];
 
+    // eager loading
+    // protected $with = ['user', 'category'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

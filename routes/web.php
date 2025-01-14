@@ -17,9 +17,11 @@ Route::get('/contact', function () {
 });
 
 Route::get('/posts', function () {
+    $posts = Post::all(); //this lazy loading by default
+    // $posts = Post::with(['category', 'user'])->get(); // eager loading
     return view('posts', [
         "title" => "Blog Page",
-        "posts" => Post::all()
+        "posts" => $posts
     ]);
 });
 
@@ -30,17 +32,23 @@ Route::get('posts/{post:slug}', function (Post $post) {
     ]);
 });
 
-Route::get('categories/{category:slug}', function (Category $category) {
+Route::get('authors/{user:username}', function (User $user) {
+    // Eager load posts with category and user relationships
+    $posts = $user->posts()->with(['category', 'user'])->get();
+
     return view('posts', [
-        "title" => "{$category->posts->count()} post in category {$category->name}",
-        "posts" => $category->posts
+        "title" => "{$posts->count()} articles by {$user->name}",
+        "posts" => $posts
     ]);
 });
 
-Route::get('authors/{user:username}', function (User $user) {
+Route::get('categories/{category:slug}', function (Category $category) {
+    // Lazy load posts first, then eager load related category and user
+    $posts = $category->posts; // Lazy loading posts
+    $posts->load(['category', 'user']); // Eager loading relationships for the retrieved posts
 
     return view('posts', [
-        "title" => "{$user->posts->count()} articles by {$user->name}",
-        "posts" => $user->posts
+        "title" => "{$posts->count()} posts in category {$category->name}",
+        "posts" => $posts
     ]);
 });
