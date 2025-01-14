@@ -17,7 +17,7 @@ Route::get('/contact', function () {
 });
 
 Route::get('/posts', function () {
-    $posts = Post::all(); //this lazy loading by default
+    $posts = Post::filter(request(['search', 'category', 'author']))->latest()->get(); //this lazy loading by default
     // $posts = Post::with(['category', 'user'])->get(); // eager loading
     return view('posts', [
         "title" => "Blog Page",

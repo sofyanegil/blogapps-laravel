@@ -2,24 +2,24 @@
     <x-slot:title>{{ $title }}</x-slot:title>
 
     <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
-        <article
-            class="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+        <article class="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue ">
             <header class="mb-4 lg:mb-6 not-format">
                 <a href="/posts/" class="font-medium text-blue-500 hover:underline"> &laquo; Back to posts</a>
                 <address class="flex items-center mb-6 not-italic">
-                    <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                    <div class="inline-flex items-center mr-3 text-sm text-gray-900 ">
                         <img class="mr-4 w-16 h-16 rounded-full"
-                            src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
+                            src="https://ui-avatars.com/api/?name={{ $post->user->name }}&size=128&background=random"
+                            alt="{{ $post->user->name }}">
                         <div>
-                            <a href="/authors/{{ $post->user->username }}" rel="author"
-                                class="text-xl font-bold text-gray-900 dark:text-white">{{ $post->user->name }}</a>
+                            <a href="/posts?author={{ $post->user->username }}" rel="author"
+                                class="text-xl font-bold text-gray-900 ">{{ $post->user->name }}</a>
 
-                            <p class="text-base text-gray-500 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                            <p class="text-base text-gray-500 "><time pubdate datetime="2022-02-08"
                                     title="February 8th, 2022">{{ $post->created_at->diffForHumans() }}</time>
                             </p>
-                            <span class="inline text-sm text-gray-500 dark:text-gray-400">
-                                <a href="/categories/{{ $post->category->slug }}"
-                                    class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-gray-800 bg-gray-100 rounded dark:bg-gray-800 dark:text-gray-100">
+                            <span class="inline text-sm text-gray-500 ">
+                                <a href="/posts?category={{ $post->category->slug }}"
+                                    class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-gray-800 bg-gray-100 rounded ">
                                     <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -32,8 +32,7 @@
                         </div>
                     </div>
                 </address>
-                <h1
-                    class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
+                <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl ">
                     {{ $post->title }}</h1>
             </header>
             <div class="not-format">
