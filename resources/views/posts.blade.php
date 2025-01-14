@@ -31,7 +31,7 @@
             </div>
 
         </form>
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
             @forelse ($posts as $post)
                 <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md ">
                     <div class="flex justify-between items-center mb-5 text-gray-500">
@@ -80,5 +80,7 @@
                 <p class="text-lg text-gray-500">No posts yet. Please check back later.</p>
             @endforelse
         </div>
+
+        {{ $posts->links() }}
     </div>
 </x-layout>
